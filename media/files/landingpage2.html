@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* General Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #fff;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333 !important;
+            font-size: 16px;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            background: url('https://th.bing.com/th/id/OIP.-Q5y6K4enzXqcKxUWb0JzgHaEK?w=290&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            margin-top: 60px; /* Adjusted for fixed navbar */
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: #007bff;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* About Section */
+        .about-img img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Services Section */
+        .service-box {
+            background-color: white;
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-box i {
+            font-size: 48px;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .service-box h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .service-box p {
+            color: #666;
+        }
+
+        .service-box:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Contact Section */
+        .contact-form {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form .form-input:focus {
+            border-color: #007bff;
+        }
+
+        .contact-form .btn-primary {
+            width: 100%;
+            padding: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <header id="home">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a href="#" class="navbar-brand">MyBrand</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Welcome to <span>MyBrand</span></h1>
+            <p>Your ultimate solution for modern business needs.</p>
+            <a href="#about" class="btn btn-primary">Get Started</a>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2>About Us</h2>
+                    <p>We are a leading company in the industry, providing top-notch services to our clients. Our team of experts is dedicated to delivering the best solutions tailored to your needs.</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="about-img">
+                        <img src="images/digipodium.logo.jpeg" alt="About Us">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section bg-light">
+        <div class="container">
+            <h2 class="text-center">Our Services</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Web Development</h3>
+                        <p>We create high-quality websites that are both visually appealing and highly functional.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>SEO Optimization</h3>
+                        <p>Improve your search engine rankings and increase your online visibility with our expert SEO services.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-box">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>Digital Marketing</h3>
+                        <p>Boost your business with our effective digital marketing strategies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="text-center">Contact Us</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="contact-form">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-input form-control" placeholder="Your Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-input form-control" placeholder="Your Email">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-input form-control" rows="4" placeholder="Your Message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 MyBrand. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

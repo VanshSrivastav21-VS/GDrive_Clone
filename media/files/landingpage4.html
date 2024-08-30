@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCommerce Landing Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #343a40;
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f8f9fa !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: url('https://th.bing.com/th/id/R.c792ff6d755eb6b3f7cc11cbbe797aff?rik=6xs7f0lXv2iAOw&riu=http%3a%2f%2fhdqwalls.com%2fdownload%2florian-dark-souls-3-ap-1366x768.jpg&ehk=rJICa4%2bpdKaQHodnaalsEOOSigOxQFMATDWTYu%2bfpDE%3d&risl=&pid=ImgRaw&r=0') no-repeat center center/cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 50px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Featured Categories */
+        .categories {
+            padding: 60px 0;
+            background-color: #fff;
+        }
+
+        .category-box {
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-box img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-box h3 {
+            margin-top: 15px;
+            font-size: 24px;
+        }
+
+        .category-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Product Showcase */
+        .product-showcase {
+            padding: 60px 0;
+        }
+
+        .product-item {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .product-item h3 {
+            margin: 15px 0;
+        }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Promotional Section */
+        .promo {
+            background-color: #007bff;
+            color: #fff;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .promo h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .promo p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .promo .btn-primary {
+            background-color: #fff;
+            color: #007bff;
+        }
+
+        .promo .btn-primary:hover {
+            background-color: #f8f9fa;
+            color: #0056b3;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">ShopNow</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#hero">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#categories">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#promo">Promo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero">
+        <div class="hero-content">
+            <h1>Discover the Best Deals on Your Favorite Products</h1>
+            <p>Shop the latest trends and enjoy exclusive offers. Your dream shopping experience starts here.</p>
+            <a href="#products" class="btn btn-primary">Shop Now</a>
+        </div>
+    </header>
+
+    <!-- Featured Categories -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="text-center">Featured Categories</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="category-box">
+                        <img src="https://thumbs.dreamstime.com/b/many-used-modern-electronic-gadgets-use-wooden-cases-white-background-reuse-recycle-concept-154801736.jpg"
+                            alt="Category 1">
+                        <h3>Electronics</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-box">
+                        <img src="https://www.wrinkled.net/wp-content/uploads/2020/02/must_have_fashion_items.jpg"
+                            alt="Category 2">
+                        <h3>Fashion</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-box">
+                        <img src="https://copysta.com/wp-content/uploads/2021/04/Paste-14.png" alt="Category 3">
+                        <h3>Home & Kitchen</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section id="products" class="product-showcase">
+        <div class="container">
+            <h2 class="text-center">Our Best Sellers</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <img src="https://res.cloudinary.com/diouplxlw/images/c_fill/f_auto,q_auto/v1702382197/Online-Grocery-Apps-Four-Key-Features-of-a-Thought-out-UX-UI-Design-banner_15207c1946/Online-Grocery-Apps-Four-Key-Features-of-a-Thought-out-UX-UI-Design-banner_15207c1946.jpg?_i=AA"
+                            alt="Product 1">
+                        <h3>Product Name 1</h3>
+                        <p>$99.99</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <img src="https://res.cloudinary.com/diouplxlw/images/c_fill/f_auto,q_auto/v1702382197/Online-Grocery-Apps-Four-Key-Features-of-a-Thought-out-UX-UI-Design-banner_15207c1946/Online-Grocery-Apps-Four-Key-Features-of-a-Thought-out-UX-UI-Design-banner_15207c1946.jpg?_i=AA"
+                            alt="Product 2">
+                        <h3>Product Name 2</h3>
+                        <p>$149.99</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <img src="https://res.cloudinary.com/diouplxlw/images/c_fill/f_auto,q_auto/v1702382197/Online-Grocery-Apps-Four-Key-Features-of-a-Thought-out-UX-UI-Design-banner_15207c1946/Online-Grocery-Apps-Four-Key-Features-of-a-Thought-out-UX-UI-Design-banner_15207c1946.jpg?_i=AA"
+                            alt="Product 3">
+                        <h3>Product Name 3</h3>
+                        <p>$199.99</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Section -->
+    <section id="promo" class="promo">
+        <div class="container">
+            <h2>Exclusive Summer Sale!</h2>
+            <p>Enjoy up to 50% off on selected items. Don't miss out on these amazing deals!</p>
+            <a href="#products" class="btn btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ShopNow. All Rights Reserved.</p>
+            <p>Follow us on <a href="#">Facebook</a>, <a href="#">Twitter</a>, and <a href="#">Instagram</a>.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

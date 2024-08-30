@@ -1,0 +1,33 @@
+/* Custom styles for the landing page */
+
+.hero-section {
+    background: url('images/hero-bg.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.icon img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    margin-top: auto;
+}

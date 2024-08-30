@@ -1,0 +1,40 @@
+
+body {
+    font-family: Arial, sans-serif;
+}
+.hero {
+    background: url('images/header.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.features .icon {
+    font-size: 3rem;
+    color: #0d6efd;
+}
+.testimonial .card {
+    border: none;
+    background-color: #f8f9fa;
+}
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 1rem 0;
+}
+footer a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}

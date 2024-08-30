@@ -1,0 +1,358 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block title %}Home - Google Drive Clone{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #202124;
+            color: #e8eaed;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 3rem;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            margin-right: 10px;
+        }
+
+        .modal-header {
+            background-color: #333;
+            color: #e8eaed;
+            border-bottom: 1px solid #444;
+        }
+
+        .modal-body {
+            background-color: #202124;
+            color: #e8eaed;
+            padding: 20px;
+        }
+
+        .card {
+            border: 1px solid #444;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #333;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #444;
+            padding: 5px;
+            font-weight: bold;
+            border-bottom: 1px solid #555;
+        }
+
+        .card-bottom {
+            background-color: #444;
+            padding: 10px;
+            font-size: 12px;
+            border-bottom: 1px solid #555;
+        }
+
+        .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .folder-card {
+            background-color: #3c4043;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .folder-card .card-body {
+            padding: 0;
+        }
+
+        .folder-icon {
+            font-size: 64px;
+            color: #5f6368;
+            margin-bottom: 10px;
+        }
+
+        .file-card {
+            background-color: #555;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .upload-section,
+        .folder-section,
+        .file-section {
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background-color: #1a73e8;
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: #202124;
+        }
+
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            opacity: 0.8;
+        }
+
+        .dropdown-menu {
+            background-color: #333;
+            border: 1px solid #444;
+        }
+
+        .dropdown-item {
+            color: #e8eaed;
+        }
+
+        .dropdown-item:hover {
+            background-color: #444;
+        }
+
+        .card-header .btn-link {
+            color: #e8eaed;
+            font-size: 18px;
+        }
+
+        .folder-name,
+        .file-name {
+            font-size: 14px;
+            margin-top: 5px;
+            word-break: break-word;
+        }
+
+        .card-wrapper {
+            padding: 10px;
+        }
+
+        .file-grid,
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .file-card .card-body,
+        .folder-card .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .file-icon {
+            font-size: 64px;
+            color: #5f6368;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <main class="container">
+        <h1 class="my-4">Home</h1>
+        <section class="upload-section d-flex justify-content-start mb-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadFileModal">
+                <i class="fas fa-upload"></i> Upload File
+            </button>
+            <button type="button" class="btn btn-secondary ms-2" data-bs-toggle="modal"
+                data-bs-target="#uploadFolderModal">
+                <i class="fas fa-folder-plus"></i> Upload Folder
+            </button>
+            <button type="button" class="btn btn-secondary ms-2" data-bs-toggle="modal"
+                data-bs-target="#createFolderModal">
+                <i class="fas fa-folder-plus"></i> Create Folder
+            </button>
+        </section>
+
+        <!-- Upload File Modal -->
+        <div class="modal fade" id="uploadFileModal" tabindex="-1" aria-labelledby="uploadFileModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadFileModalLabel">Upload File</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" enctype="multipart/form-data" action="{% url 'upload_file' %}">
+                            {% csrf_token %}
+                            <input type="file" name="file" class="form-control mb-3" required>
+                            <button type="submit" class="btn btn-primary">Upload File</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Folder Modal -->
+        <div class="modal fade" id="uploadFolderModal" tabindex="-1" aria-labelledby="uploadFolderModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadFolderModalLabel">Upload Folder</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" enctype="multipart/form-data" action="{% url 'upload_folder' %}">
+                            {% csrf_token %}
+                            <input type="file" name="files" webkitdirectory directory multiple class="form-control mb-3"
+                                required>
+                            <input type="text" name="folder_name" class="form-control mb-3" placeholder="Folder Name"
+                                required>
+                            <button type="submit" class="btn btn-primary">Upload Folder</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Folder Modal -->
+        <div class="modal fade" id="createFolderModal" tabindex="-1" aria-labelledby="createFolderModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createFolderModalLabel">Create Folder</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="{% url 'create_folder' %}">
+                            {% csrf_token %}
+                            <input type="text" name="folder_name" class="form-control mb-3"
+                                placeholder="New Folder Name" required>
+                            <button type="submit" class="btn btn-primary">Create Folder</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="folder-section">
+            <h2>Folders</h2>
+            <div class="folder-grid">
+                {% for folder in folders %}
+                <div class="card-wrapper">
+                    <div class="card folder-card" data-id="{{ folder.id }}">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div class="folder-name">{{ folder.name }}</div>
+                            <button class="btn btn-link text-light" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{% url 'folder_detail' folder.id %}">Folder
+                                        Information</a></li>
+                                <li><a class="dropdown-item" href="{% url 'rename_folder' folder.id %}">Rename</a></li>
+                                <li><a class="dropdown-item" href="{% url 'move_to_trash_folder' folder.id %}">Move to
+                                        Trash</a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <i class="fas fa-folder folder-icon"></i>
+                            <div class="folder-name">{{ folder.name }}</div>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="last-used">Last used: {{ folder.last_used|date:"d M Y, H:i" }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No folders found.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="file-section">
+            <h2>Files</h2>
+            <div class="file-grid">
+                {% for file in files %}
+                <div class="card-wrapper">
+                    <div class="card file-card" data-id="{{ file.id }}" data-url="{% url 'open_file' file.id %}">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div class="folder-name">{{ file.name }}</div>
+                            <button class="btn btn-link text-light" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{% url 'file_detail' file.id %}">File Information</a>
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'rename_file' file.id %}">Rename</a></li>
+                                <li><a class="dropdown-item" href="#">Make a Copy</a></li>
+                                <li><a class="dropdown-item" href="{% url 'move_to_trash_file' file.id %}">Move to
+                                        Trash</a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <i class="fas fa-file file-icon"></i>
+                            <div class="folder-name">{{ file.name }}</div>
+                        </div>
+                        <div class="card-bottom">
+                            <div class="last-used">Last used: {{ file.last_used|date:"d M Y, H:i" }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No files found.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Handle double-click on folder cards
+            document.querySelectorAll('.folder-card').forEach(card => {
+                card.addEventListener('dblclick', function () {
+                    const folderId = this.dataset.id;
+                    window.location.href = `/folder/${folderId}/`;  // Adjust URL based on your routing
+                });
+            });
+
+            // Handle double-click on file cards
+            document.querySelectorAll('.file-card').forEach(card => {
+                card.addEventListener('dblclick', function () {
+                    const fileUrl = this.dataset.url;
+                    if (fileUrl) {
+                        window.location.href = fileUrl;  // Open the file
+                    } else {
+                        console.error("File URL is not set.");
+                    }
+                });
+            });
+        });
+
+    </script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+{% endblock %}

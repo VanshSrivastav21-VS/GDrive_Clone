@@ -1,0 +1,36 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div class="container" style="margin-top: 3rem;">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- File or Folder Title -->
+            <h1>{{ file.name }}</h1>
+            <!-- File or Folder Thumbnail -->
+            <div class="mb-3">
+                {% if file.is_folder %}
+                    <i class="fa fa-folder fa-5x"></i>
+                {% else %}
+                    <img src="{{ file.thumbnail.url }}" alt="{{ file.name }}" class="img-fluid">
+                {% endif %}
+            </div>
+            <!-- File or Folder Details -->
+            <p><strong>Type:</strong> {{ file.get_file_type_display }}</p>
+            <p><strong>Size:</strong> {{ file.size }} bytes</p>
+            <p><strong>Uploaded:</strong> {{ file.uploaded_at }}</p>
+            <p><strong>Description:</strong> {{ file.description }}</p>
+            
+            <!-- Action Buttons -->
+            <div class="mt-3">
+                {% if file.is_folder %}
+                    <a href="{% url 'open_folder' file.id %}" class="btn btn-primary">Open Folder</a>
+                {% else %}
+                    <a href="{% url 'download_file' file.id %}" class="btn btn-success">Download File</a>
+                    <a href="{% url 'share_file' file.id %}" class="btn btn-info">Share File</a>
+                {% endif %}
+                <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

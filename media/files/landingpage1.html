@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Landing Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Styling */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    height: 100vh;
+    background: url('images/wp6941016.jpg') no-repeat center center/cover;
+    position: relative;
+}
+
+.hero {
+    height: 100%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content .fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+.hero-content .delay-1 {
+    animation-delay: 1s;
+}
+
+.hero-content .delay-2 {
+    animation-delay: 2s;
+}
+
+.btn-animated {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-animated:hover {
+    background-color: #0056b3;
+    transform: translateY(-5px);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #007bff;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background: #007bff;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}
+
+.section-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+/* Service Boxes */
+.service-box {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.service-box:hover {
+    transform: translateY(-10px);
+}
+
+.service-img-container {
+    overflow: hidden;
+    border-bottom: 4px solid #007bff;
+}
+
+.img-hover-zoom img {
+    transition: transform 0.5s ease;
+}
+
+.img-hover-zoom:hover img {
+    transform: scale(1.1);
+}
+
+/* Contact Form */
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form .btn-animated {
+    background-color: #007bff;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.contact-form .btn-animated:hover {
+    background-color: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header class="bg-dark text-white">
+        <nav class="navbar navbar-expand-lg navbar-dark container">
+            <a class="navbar-brand font-weight-bold" href="#">MyWebsite</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero text-center d-flex align-items-center justify-content-center">
+            <div class="hero-content">
+                <h1 class="display-4 font-weight-bold fade-in">Welcome to MyWebsite</h1>
+                <p class="lead fade-in delay-1">Your one-stop solution for all your needs</p>
+                <a href="#about" class="btn btn-primary btn-lg btn-animated fade-in delay-2">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="container py-5 text-center">
+        <h2 class="section-title">About Us</h2>
+        <p class="section-text">We are a leading company in our industry, committed to providing top-quality services to our clients.</p>
+    </section>
+
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Our Services</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card service-box shadow-sm">
+                        <div class="service-img-container">
+                            <img src="images/digipodium.logo.jpeg" class="card-img-top img-hover-zoom" alt="Service 1">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Service 1</h5>
+                            <p class="card-text">High-quality solutions tailored to your business needs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-box shadow-sm">
+                        <div class="service-img-container">
+                            <img src="https://i5.walmartimages.com/asr/132ce3cd-960f-45eb-ab76-7b905ae5446a_1.8c691ae11498f07c2fef9050819a849d.jpeg?odnWidth=1000&odnHeight=1000&odnBg=ffffff" class="card-img-top img-hover-zoom" alt="Service 2">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Service 2</h5>
+                            <p class="card-text">Innovative and efficient strategies for your success.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card service-box shadow-sm">
+                        <div class="service-img-container">
+                            <img src="https://th.bing.com/th/id/OIP.ruv6_95Wgzrzg1ORgLvDIwHaHb?pid=ImgDet&w=203&h=203&c=7&dpr=1.5" class="card-img-top img-hover-zoom" alt="Service 3">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Service 3</h5>
+                            <p class="card-text">Comprehensive support and guidance every step of the way.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container py-5">
+        <h2 class="section-title text-center mb-5">Contact Us</h2>
+        <form class="contact-form">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary  btn-animated">Submit</button>
+        </form>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

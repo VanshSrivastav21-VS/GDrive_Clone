@@ -1,0 +1,84 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}{{ folder.name }}{% endblock %}
+
+{% block styles %}
+<style>
+    .file-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .card.file-card {
+        background-color: #444;
+        border: 1px solid #333;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+        cursor: pointer;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card.file-card:hover {
+        background-color: #555;
+    }
+
+    .file-icon {
+        font-size: 64px;
+        color: #1a73e8;
+    }
+
+    .file-name {
+        margin-top: 10px;
+        color: #e8eaed;
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 3rem;">
+    <h2 class="text-light">{{ folder.name }}</h2>
+    <div class="file-grid">
+        {% for file in files %}
+        <div class="card-wrapper" data-url="{% url 'open_file' file.id %}">
+            <div class="card file-card">
+                <div class="card-body">
+                    <i class="fas fa-file file-icon"></i>
+                    <div class="file-name">{{ file.name }}</div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-light">No files in this folder.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.card-wrapper').forEach(card => {
+            card.addEventListener('dblclick', function () {
+                const fileUrl = this.dataset.url;
+                if (fileUrl) {
+                    window.location.href = fileUrl;
+                } else {
+                    console.error("File URL is not set.");
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

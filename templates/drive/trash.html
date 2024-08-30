@@ -1,0 +1,136 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block title %}Trash - Google Drive Clone{% endblock %}
+
+{% block styles %}
+<style>
+    .card-wrapper {
+        padding: 10px;
+    }
+
+    .trash-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .card.trash-card {
+        background-color: #555;
+        border: 1px solid #444;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        transition: background-color 0.3s;
+        height: 250px;
+        /* Fixed height for all cards */
+        width: 100%;
+    }
+
+    .card.trash-card:hover {
+        background-color: #444;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        color: #e8eaed;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-overflow: ellipsis;
+        /* Ensures that long names are truncated */
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .item-icon {
+        font-size: 48px;
+        color: #5f6368;
+        margin-right: 10px;
+    }
+
+    .file-icon {
+        font-size: 64px;
+        color: #5f6368;
+    }
+
+    .folder-icon {
+        color: #fbbc05;
+    }
+
+    .card-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 150px;
+        /* Height for the icon area */
+        width: 100%;
+        overflow: hidden;
+        /* Ensures that content doesn't overflow */
+    }
+
+    .dropdown-menu {
+        background-color: #333;
+        border: 1px solid #444;
+    }
+
+    .dropdown-item {
+        color: #e8eaed;
+    }
+
+    .dropdown-item:hover {
+        background-color: #444;
+    }
+
+    .btn-link {
+        color: #e8eaed;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 3rem;">
+    <h2 class="text-light">Trash</h2>
+    <div class="trash-grid">
+        {% for item in trash_items %}
+        <div class="card-wrapper">
+            <div class="card trash-card">
+                <div class="card-header">
+                    <span>{{ item.name }}</span>
+                    <button class="btn btn-link text-light" data-bs-toggle="dropdown">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            {% if item.is_folder %}
+                            <a class="dropdown-item" href="{% url 'restore_folder' item.id %}">Restore</a>
+                            <a class="dropdown-item" href="{% url 'delete_folder' item.id %}">Permanently Delete</a>
+                            {% else %}
+                            <a class="dropdown-item" href="{% url 'restore_file' item.id %}">Restore</a>
+                            <a class="dropdown-item" href="{% url 'delete_file' item.id %}">Permanently Delete</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    {% if item.is_folder %}
+                    <i class="fas fa-folder folder-icon"></i>
+                    {% else %}
+                    <i class="fas fa-file file-icon"></i>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-light">No items in trash.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

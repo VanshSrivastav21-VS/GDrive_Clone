@@ -1,0 +1,25 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="container" style="margin-top: 3rem;">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm bg-dark text-light">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Rename Folder</h4>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="folder_name" class="form-label">New Folder Name</label>
+                            <input type="text" class="form-control bg-secondary text-light" id="folder_name" name="folder_name" value="{{ folder.name }}" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-block">Rename Folder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

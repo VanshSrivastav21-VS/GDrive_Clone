@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Landing Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #333;
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f8f9fa !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: url('https://media.istockphoto.com/photos/empty-dark-wooden-table-in-front-of-abstract-blurred-bokeh-background-picture-id1130714046?k=6&m=1130714046&s=612x612&w=0&h=AqePj4OXa9kJDTGuh10EVF8GbcWpo6m7mEHE8xOm7nI=') no-repeat center center/cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .btn-primary {
+            background-color: #e03e36;
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 50px;
+        }
+
+        .btn-primary:hover {
+            background-color: #c62827;
+        }
+
+        /* Menu Highlights */
+        .menu-highlights {
+            padding: 60px 0;
+            background-color: #fff;
+        }
+
+        .menu-item {
+            text-align: center;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item h3 {
+            margin-top: 15px;
+            font-size: 24px;
+        }
+
+        .menu-item p {
+            color: #666;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Us */
+        .about-us {
+            padding: 60px 0;
+            background-color: #f4f4f4;
+        }
+
+        .about-us img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-us h2 {
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        .about-us p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 60px 0;
+            background-color: #fff;
+        }
+
+        .testimonial-item {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .testimonial-item img {
+            width: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-item h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-item p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 60px 0;
+        }
+
+        .contact-form {
+            background-color: #f4f4f4;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form .form-input:focus {
+            border-color: #e03e36;
+        }
+
+        .contact-form .btn-primary {
+            width: 100%;
+            padding: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #e03e36;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .about-us h2 {
+                font-size: 28px;
+            }
+
+            .about-us p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Gourmet Bistro</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#hero">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#menu">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#testimonials">Testimonials</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Gourmet Bistro</h1>
+            <p>Experience the finest dining with a touch of elegance and comfort.</p>
+            <a href="#menu" class="btn btn-primary">View Menu</a>
+        </div>
+    </header>
+
+    <!-- Menu Highlights -->
+    <section id="menu" class="menu-highlights">
+        <div class="container">
+            <h2 class="text-center">Menu Highlights</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="menu-item">
+                        <img src="https://th.bing.com/th/id/OIP.ckmn06EHl2xOFqAiBNWo7gHaE8?rs=1&pid=ImgDetMain" alt="Dish 1">
+                        <h3>Delicious Pasta</h3>
+                        <p>$12.99</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="menu-item">
+                        <img src="https://grillgirl.com/wp-content/uploads/2011/11/How-to-Grill-steak-on-the-Big-Green-Egg-1-of-1.jpg" alt="Dish 2">
+                        <h3>Grilled Steak</h3>
+                        <p>$24.99</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="menu-item">
+                        <img src="https://thumbs.dreamstime.com/b/vegetable-salad-13203694.jpg" alt="Dish 3">
+                        <h3>Fresh Salad</h3>
+                        <p>$8.99</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="https://th.bing.com/th/id/OIP.BJWizfHCcjpS9Y5dyJsg7wHaEK?w=290&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Restaurant">
+                </div>
+                <div class="col-md-6">
+                    <h2>About Us</h2>
+                    <p>At Gourmet Bistro, we pride ourselves on delivering an exceptional dining experience. Our dishes are crafted with the finest ingredients and served in an elegant setting. Whether you're here for a special occasion or a casual meal, we ensure every visit is memorable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="text-center">What Our Guests Say</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-item">
+                        <img src="https://th.bing.com/th/id/OIP.t07bnDp_EINJd-qLJOenZQHaHa?w=165&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Guest 1">
+                        <h4>Hennry Cavil</h4>
+                        <p>"The best dining experience I've ever had. The food was exquisite and the service was impeccable."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-item">
+                        <img src="https://th.bing.com/th/id/OIP.t07bnDp_EINJd-qLJOenZQHaHa?w=165&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Guest 2">
+                        <h4>Hennry Cavil</h4>
+                        <p>"Absolutely fantastic! The atmosphere was perfect for a romantic dinner, and the food was amazing."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-item">
+                        <img src="https://th.bing.com/th/id/OIP.t07bnDp_EINJd-qLJOenZQHaHa?w=165&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" alt="Guest 3">
+                        <h4>Hennry Cavil</h4>
+                        <p>"A hidden gem in the city. Great food, excellent service, and a wonderful experience overall."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="text-center">Contact Us</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="contact-form">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-input form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-input form-control" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-input form-control" rows="4" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Gourmet Bistro. All Rights Reserved.</p>
+            <p>Follow us on <a href="#">Facebook</a>, <a href="#">Twitter</a>, and <a href="#">Instagram</a>.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
