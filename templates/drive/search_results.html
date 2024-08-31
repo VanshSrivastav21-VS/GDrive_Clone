@@ -1,0 +1,31 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <h2>Search Results for "{{ query }}"</h2>
+    
+    {% if files or folders %}
+        {% if files %}
+            <h3>Files</h3>
+            <ul>
+                {% for file in files %}
+                    <li>
+                        <a href="{% url 'file_detail' file.id %}">{{ file.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if folders %}
+            <h3>Folders</h3>
+            <ul>
+                {% for folder in folders %}
+                    <li>
+                        <a href="{% url 'folder_detail' folder.id %}">{{ folder.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% else %}
+        <p>No results found for your search.</p>
+    {% endif %}
+{% endblock %}

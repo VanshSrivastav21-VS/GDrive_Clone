@@ -31,5 +31,7 @@ urlpatterns = [
     
     path('share/file/<int:file_id>/', views.share_file, name='share_file'),
     path('share/folder/<int:folder_id>/', views.share_folder, name='share_folder'),
+
+    path('search/', views.search_results, name='search_results'),
 ]
 

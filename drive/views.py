@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from allauth.socialaccount.models import SocialAccount
 from .models import File, Folder, Trash
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.http import HttpResponseNotFound
+from django.db.models import Q
 
 # Signup
 from .forms import SignUpForm
@@ -14,6 +16,7 @@ from django.contrib.auth import authenticate, login as auth_login
 
 @login_required
 def home(request):
+    # Handle POST requests for file upload or folder creation
     if request.method == 'POST':
         if 'file' in request.FILES:
             # Handle file upload
@@ -27,11 +30,22 @@ def home(request):
             new_folder.save()
         return redirect('home')
 
+    # Fetch the user's Google avatar URL if authenticated
+    avatar_url = None
+    if request.user.is_authenticated:
+        social_account = SocialAccount.objects.filter(user=request.user, provider='google').first()
+        if social_account:
+            avatar_url = social_account.get_avatar_url()
+
+    # Prepare context for rendering the home page
     context = {
-        'files': File.objects.filter(owner=request.user, is_trashed=False).all(),
-        'folders': Folder.objects.filter(owner=request.user, is_trashed=False).all(),
+        'files': File.objects.filter(owner=request.user, is_trashed=False),
+        'folders': Folder.objects.filter(owner=request.user, is_trashed=False),
+        'avatar_url': avatar_url,
     }
+    
     return render(request, 'drive/home.html', context)
+
 
 @login_required
 def upload_file(request):
@@ -219,6 +233,19 @@ def share_folder(request, folder_id):
         )
         return render(request, 'success.html', {'message': 'Folder shared successfully!'})
     return render(request, 'drive/share_form.html', {'folder': folder})
+
+def search_results(request):
+    query = request.GET.get('q')
+    user = request.user
+
+    if query:
+        search_results = File.objects.filter(
+            Q(name__icontains=query) & Q(owner=user)
+        ).distinct()
+    else:
+        search_results = File.objects.none()
+
+    return render(request, 'drive/search_results.html', {'search_results': search_results})
 
 
 

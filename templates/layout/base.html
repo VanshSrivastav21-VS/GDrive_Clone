@@ -38,17 +38,25 @@
         }
 
         .navbar-nav {
-            /* margin-left: auto; */
-            margin-right: 10rem;
+            margin-left: auto;
+        }
+
+        .navbar-nav h4 {
+            padding-top: 3.5px;
         }
 
         .navbar-nav .nav-link {
             color: white;
-            /* margin-left: 10px; */
         }
 
         .navbar-nav .nav-link:hover {
             color: #e0e0e0;
+        }
+
+        .dropdown-header {
+            color: white;
+            padding-top: 10px;
+            font-size: 1.4rem;
         }
 
         .sidebar {
@@ -154,6 +162,8 @@
         .google-cloud-search .form-control::placeholder {
             color: #9aa0a6;
         }
+
+        
     </style>
     {% block styles %}
 
@@ -167,27 +177,35 @@
                 <img src="{% static 'images/drivelogo.png' %}" alt="Google Drive Logo">
                 Drive
             </a>
-            <form class="d-flex google-cloud-search" action="#" method="GET">
+            <form class="d-flex google-cloud-search" action="{% url 'search_results' %}" method="GET">
                 <div class="search-wrapper">
-                    <!-- <i class="bi bi-search search-icon"></i> -->
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="q">
                 </div>
             </form>
             <div class="navbar-nav ms-auto">
-               
-
-
                 {% if user.is_authenticated %}
-                <h2>Hi {{ user.username }}</h2>
-                <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:none;">
-                    {% csrf_token %}
-                </form>
-                <a class="nav-item nav-link" style="color: white;"  href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                <h1 class="dropdown-header">Hi {{ user.username }}</h1>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                        id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ avatar_url }}" alt="Profile Picture" class="rounded-circle" width="30" height="30"
+                            style="border: 1px solid white;">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#"
+                                onclick="document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:none;">
+                                {% csrf_token %}
+                            </form>
+                        </li>
+                    </ul>
+                </div>
                 {% else %}
-                <a href="/account/login/"></a>
+                <a class="nav-item nav-link" href="{% url 'account_login' %}">Login</a>
                 {% endif %}
-
             </div>
+
         </div>
     </nav>
 
@@ -260,6 +278,7 @@
             // You can send this token to your server and authenticate the user
         }
     </script>
+
 </body>
 
 </html>
