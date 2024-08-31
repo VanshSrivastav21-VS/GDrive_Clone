@@ -270,6 +270,8 @@
                                 <li><a class="dropdown-item" href="{% url 'rename_folder' folder.id %}">Rename</a></li>
                                 <li><a class="dropdown-item" href="{% url 'move_to_trash_folder' folder.id %}">Move to
                                         Trash</a></li>
+
+                                <li><a class="dropdown-item" href="{% url 'share_folder' folder.id %}">Share</a></li>
                             </ul>
                         </div>
                         <div class="card-body">
@@ -305,6 +307,7 @@
                                 <li><a class="dropdown-item" href="#">Make a Copy</a></li>
                                 <li><a class="dropdown-item" href="{% url 'move_to_trash_file' file.id %}">Move to
                                         Trash</a></li>
+                                <li><a class="dropdown-item" href="{% url 'share_file' file.id %}">Share</a></li>
                             </ul>
                         </div>
                         <div class="card-body">

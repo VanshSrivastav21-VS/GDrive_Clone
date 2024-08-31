@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from io import BytesIO
@@ -19,6 +20,9 @@ class Folder(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('folder_detail', args=[self.id])
 
 class File(models.Model):
     name = models.CharField(max_length=255)
@@ -34,6 +38,9 @@ class File(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('file_detail', args=[self.id])
 
     def get_thumbnail(self):
         # Check if the thumbnail is available

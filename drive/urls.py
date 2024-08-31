@@ -28,6 +28,8 @@ urlpatterns = [
     path('file/<int:id>/delete/', views.permanently_delete_file, name='delete_file'),
 
     path('file/download/<int:file_id>/', views.download_file, name='download_file'),
-    path('file/share/<int:file_id>/', views.share_file, name='share_file'),
+    
+    path('share/file/<int:file_id>/', views.share_file, name='share_file'),
+    path('share/folder/<int:folder_id>/', views.share_folder, name='share_folder'),
 ]
 

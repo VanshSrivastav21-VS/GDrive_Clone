@@ -50,6 +50,13 @@
         border-bottom: 1px solid #555;
     }
 
+    .card-bottom {
+        background-color: #444;
+        padding: 10px;
+        font-size: 12px;
+        border-bottom: 1px solid #555;
+    }
+
     .card-body {
         padding: 15px;
         text-align: center;
@@ -120,7 +127,8 @@
         font-size: 18px;
     }
 
-    .folder-name, .file-name {
+    .folder-name,
+    .file-name {
         font-size: 14px;
         margin-top: 5px;
         word-break: break-word;
@@ -130,13 +138,15 @@
         padding: 10px;
     }
 
-    .file-grid, .folder-grid {
+    .file-grid,
+    .folder-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 20px;
     }
 
-    .file-card .card-body, .folder-card .card-body {
+    .file-card .card-body,
+    .folder-card .card-body {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -168,14 +178,19 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{% url 'folder_detail' folder.id %}">Folder Information</a></li>
+                            <li><a class="dropdown-item" href="{% url 'folder_detail' folder.id %}">Folder
+                                    Information</a></li>
                             <li><a class="dropdown-item" href="{% url 'rename_folder' folder.id %}">Rename</a></li>
-                            <li><a class="dropdown-item" href="{% url 'move_to_trash_folder' folder.id %}">Move to Trash</a></li>
+                            <li><a class="dropdown-item" href="{% url 'move_to_trash_folder' folder.id %}">Move to
+                                    Trash</a></li>
                         </ul>
                     </div>
                     <div class="card-body">
                         <i class="fas fa-folder folder-icon"></i>
                         <div class="folder-name">{{ folder.name }}</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="last-used">Last used: {{ folder.last_used|date:"d M Y, H:i" }}</div>
                     </div>
                 </div>
             </div>
@@ -184,7 +199,7 @@
             {% endfor %}
         </div>
     </section>
-    
+
     <section class="file-section">
         <h2>Files</h2>
         <div class="file-grid">
@@ -197,15 +212,20 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{% url 'file_detail' file.id %}">File Information</a></li>
+                            <li><a class="dropdown-item" href="{% url 'file_detail' file.id %}">File Information</a>
+                            </li>
                             <li><a class="dropdown-item" href="{% url 'rename_file' file.id %}">Rename</a></li>
                             <li><a class="dropdown-item" href="#">Make a Copy</a></li>
-                            <li><a class="dropdown-item" href="{% url 'move_to_trash_file' file.id %}">Move to Trash</a></li>
+                            <li><a class="dropdown-item" href="{% url 'move_to_trash_file' file.id %}">Move to Trash</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="card-body">
                         <i class="fas fa-file file-icon"></i>
                         <div class="folder-name">{{ file.name }}</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="last-used">Last used: {{ file.last_used|date:"d M Y, H:i" }}</div>
                     </div>
                 </div>
             </div>

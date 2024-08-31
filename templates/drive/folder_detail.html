@@ -72,11 +72,7 @@
         document.querySelectorAll('.card-wrapper').forEach(card => {
             card.addEventListener('dblclick', function () {
                 const fileUrl = this.dataset.url;
-                if (fileUrl) {
-                    window.location.href = fileUrl;
-                } else {
-                    console.error("File URL is not set.");
-                }
+                window.location.href = fileUrl;  // Adjust URL based on your routing
             });
         });
     });

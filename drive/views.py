@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import File, Folder, Trash
+from django.core.mail import send_mail
 from django.contrib import messages
 from django.http import HttpResponseNotFound
 
@@ -190,8 +191,33 @@ def download_file(request, file_id):
 
 def share_file(request, file_id):
     file = get_object_or_404(File, id=file_id)
-    # Logic for sharing file (e.g., generating a shareable link)
-    pass
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        # Here you would set up the email content and send the email
+        send_mail(
+            'Shared File',
+            f'You have been shared a file: {file.name}. You can access it here: {file.get_absolute_url()}',
+            'your_email@example.com',
+            [email],
+            fail_silently=False,
+        )
+        return render(request, 'success.html', {'message': 'File shared successfully!'})
+    return render(request, 'drive/share_form.html', {'file': file})
+
+def share_folder(request, folder_id):
+    folder = get_object_or_404(Folder, id=folder_id)
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        # Here you would set up the email content and send the email
+        send_mail(
+            'Shared Folder',
+            f'You have been shared a folder: {folder.name}. You can access it here: {folder.get_absolute_url()}',
+            'your_email@example.com',
+            [email],
+            fail_silently=False,
+        )
+        return render(request, 'success.html', {'message': 'Folder shared successfully!'})
+    return render(request, 'drive/share_form.html', {'folder': folder})
 
 
 
