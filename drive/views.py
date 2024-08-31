@@ -8,6 +8,7 @@ from django.http import HttpResponseNotFound
 # Signup
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate, login as auth_login
 
 
 
@@ -236,4 +237,24 @@ def signup(request):
             return redirect('home')
     else:
         form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, 'account/signup.html', {'form': form})
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if username and password:
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                auth_login(request, user)  # Ensure this call is correct
+                return redirect('home')
+            else:
+                messages.error(request, "Invalid username or password.")
+        else:
+            messages.error(request, "Username and password are required.")
+
+        return redirect('login')
+    else:
+        return render(request, 'account/login.html')

@@ -38,12 +38,13 @@
         }
 
         .navbar-nav {
-            margin-left: auto;
+            /* margin-left: auto; */
+            margin-right: 10rem;
         }
 
         .navbar-nav .nav-link {
             color: white;
-            margin-left: 10px;
+            /* margin-left: 10px; */
         }
 
         .navbar-nav .nav-link:hover {
@@ -173,18 +174,19 @@
                 </div>
             </form>
             <div class="navbar-nav ms-auto">
+               
+
+
                 {% if user.is_authenticated %}
-                <span class="nav-item nav-link" style="color: white;">Welcome, {{ user.username }}</span>
+                <h2>Hi {{ user.username }}</h2>
                 <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:none;">
                     {% csrf_token %}
                 </form>
                 <a class="nav-item nav-link" style="color: white;"  href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
                 {% else %}
-                <a class="nav-item nav-link" style="color: white;" href="{% url 'login' %}">Login</a>
-                <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-callback="handleCredentialResponse">
-                </div>
-                <div class="g_id_signin" data-type="standard"></div>
+                <a href="/account/login/"></a>
                 {% endif %}
+
             </div>
         </div>
     </nav>
