@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.http import HttpResponseNotFound
 from django.db.models import Q
+from django.conf import settings
 
 # Signup
 from .forms import SignUpForm
@@ -204,35 +205,27 @@ def download_file(request, file_id):
     # Logic for file download (e.g., using FileResponse or HttpResponse)
     pass
 
+@login_required
 def share_file(request, file_id):
     file = get_object_or_404(File, id=file_id)
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        # Here you would set up the email content and send the email
-        send_mail(
-            'Shared File',
-            f'You have been shared a file: {file.name}. You can access it here: {file.get_absolute_url()}',
-            'your_email@example.com',
-            [email],
-            fail_silently=False,
-        )
-        return render(request, 'success.html', {'message': 'File shared successfully!'})
-    return render(request, 'drive/share_form.html', {'file': file})
+    if request.method == "POST":
+        recipient_email = request.POST.get('email')
+        subject = f"Shared File: {file.name}"
+        message = f"A file has been shared with you.\n\nFile Name: {file.name}\n"
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient_email])
+        return redirect('home')
+    return render(request, 'drive/share_file.html', {'file': file})
 
+@login_required
 def share_folder(request, folder_id):
     folder = get_object_or_404(Folder, id=folder_id)
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        # Here you would set up the email content and send the email
-        send_mail(
-            'Shared Folder',
-            f'You have been shared a folder: {folder.name}. You can access it here: {folder.get_absolute_url()}',
-            'your_email@example.com',
-            [email],
-            fail_silently=False,
-        )
-        return render(request, 'success.html', {'message': 'Folder shared successfully!'})
-    return render(request, 'drive/share_form.html', {'folder': folder})
+    if request.method == "POST":
+        recipient_email = request.POST.get('email')
+        subject = f"Shared Folder: {folder.name}"
+        message = f"A folder has been shared with you.\n\nFolder Name: {folder.name}\n"
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient_email])
+        return redirect('home')
+    return render(request, 'drive/share_folder.html', {'folder': folder})
 
 def search_results(request):
     query = request.GET.get('q')

@@ -38,15 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'drive',
     'social_django',
+    'drive',
     'allauth',
     'allauth.account',
-    # Optional -- requires install using `django-allauth[socialaccount]`.
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-
 ]
+
+# Provider specific settings
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -149,8 +150,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-# Provider specific settings
-SITE_ID = 1
+
 
 # LOGIN_REDIRECT_URL = '/'
 
@@ -169,12 +169,12 @@ SOCIALACCOUNT_PROVIDERS ={
 
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'vanshsrivastav2002@gmail.com'
-# EMAIL_HOST_PASSWORD = 'alexa123'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your_email@gmail.com'  # Replace with your Gmail address
+EMAIL_HOST_PASSWORD = 'your_password'  # Replace with your Gmail password or app-specific password
 
 
 

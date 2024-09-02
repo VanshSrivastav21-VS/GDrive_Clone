@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import share_file, share_folder
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -29,8 +31,8 @@ urlpatterns = [
 
     path('file/download/<int:file_id>/', views.download_file, name='download_file'),
     
-    path('share/file/<int:file_id>/', views.share_file, name='share_file'),
-    path('share/folder/<int:folder_id>/', views.share_folder, name='share_folder'),
+    path('share/file/<int:file_id>/', share_file, name='share_file'),
+    path('share/folder/<int:folder_id>/', share_folder, name='share_folder'),
 
     path('search/', views.search_results, name='search_results'),
 ]

@@ -1,0 +1,28 @@
+/* Custom Styles */
+header {
+    background-image: url('background-image.jpg'); /* Replace with your image */
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header h1 {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+header p {
+    font-size: 1.5rem;
+}
+
+.card i {
+    font-size: 3rem;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
